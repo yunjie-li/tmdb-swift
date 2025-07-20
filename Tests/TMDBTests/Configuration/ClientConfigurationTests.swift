@@ -1,10 +1,3 @@
-//
-//  ClientTests.swift
-//  TMDB
-//
-//  Created by Igor Camilo on 16.07.25.
-//
-
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -12,7 +5,7 @@ import FoundationNetworking
 import Testing
 import TMDB
 
-struct ClientTests {
+struct ClientConfigurationTests {
     @Test
     func configurationSuccess() async throws {
         // Setup
@@ -26,12 +19,12 @@ struct ClientTests {
             try await client.configuration()
         }
         // Verify
-        let urlRquest = try #require(await urlRequestStorage.value)
-        #expect(urlRquest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
-        #expect(urlRquest.httpMethod == "GET")
-        #expect(urlRquest.httpBody == nil)
+        let urlRequest = try #require(await urlRequestStorage.value)
+        #expect(urlRequest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
+        #expect(urlRequest.httpMethod == "GET")
+        #expect(urlRequest.httpBody == nil)
         #expect(
-            urlRquest.allHTTPHeaderFields == [
+            urlRequest.allHTTPHeaderFields == [
                 "Authorization": "Bearer ABC123",
                 "Accept": "application/json",
             ]
@@ -51,12 +44,12 @@ struct ClientTests {
             try await client.configuration()
         }
         // Verify
-        let urlRquest = try #require(await urlRequestStorage.value)
-        #expect(urlRquest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
-        #expect(urlRquest.httpMethod == "GET")
-        #expect(urlRquest.httpBody == nil)
+        let urlRequest = try #require(await urlRequestStorage.value)
+        #expect(urlRequest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
+        #expect(urlRequest.httpMethod == "GET")
+        #expect(urlRequest.httpBody == nil)
         #expect(
-            urlRquest.allHTTPHeaderFields == [
+            urlRequest.allHTTPHeaderFields == [
                 "Authorization": "Bearer DEF456",
                 "Accept": "application/json",
             ]
@@ -77,12 +70,12 @@ struct ClientTests {
             try await client.configuration()
         }
         // Verify
-        let urlRquest = try #require(await urlRequestStorage.value)
-        #expect(urlRquest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
-        #expect(urlRquest.httpMethod == "GET")
-        #expect(urlRquest.httpBody == nil)
+        let urlRequest = try #require(await urlRequestStorage.value)
+        #expect(urlRequest.url?.absoluteString == "https://api.themoviedb.org/3/configuration")
+        #expect(urlRequest.httpMethod == "GET")
+        #expect(urlRequest.httpBody == nil)
         #expect(
-            urlRquest.allHTTPHeaderFields == [
+            urlRequest.allHTTPHeaderFields == [
                 "Authorization": "Bearer GHI789",
                 "Accept": "application/json",
             ]
