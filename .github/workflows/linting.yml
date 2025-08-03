@@ -1,4 +1,4 @@
-name: "Linting"
+name: "Linter"
 on:
   push:
     branches: [ "main" ]
@@ -8,12 +8,12 @@ permissions:
   contents: read
 jobs:
   swift-linter:
-    name: Swift linter
+    name: Swift
     runs-on: ubuntu-24.04
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    - name: Install Swift
+    - name: Install Swift and run linter
       run: |
         sudo apt-get -y install libcurl4-openssl-dev
         curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz
@@ -21,7 +21,6 @@ jobs:
         ./swiftly init --skip-install --quiet-shell-followup
         . "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh"
         hash -r
-        swiftly install
-        swift --version
-    - name: Lint code
-      run: swift format lint . -rps
+        swiftly install --use 6.1
+        swiftly run swift --version
+        swiftly run swift format lint . -rps

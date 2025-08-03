@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   xcode-tests:
-    name: Xcode tests (${{ matrix.name }})
+    name: Xcode 16.4 (${{ matrix.name }})
     runs-on: macos-15
     strategy:
       fail-fast: false
@@ -55,30 +55,51 @@ jobs:
       with:
         name: Artifacts (${{ matrix.name }})
         path: Artifacts
-  swift-tests-macos:
-    name: Swift tests (macOS)
-    runs-on: macos-15
+  swift-tests-macOS:
+    name: Swift ${{ matrix.swift-version }} (macOS)
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - swift-version: "6.1"
+          xcode-version: "16.3"
+          runner: macos-15
+        - swift-version: "6.0"
+          xcode-version: "16.0"
+          runner: macos-15
+        - swift-version: "5.10"
+          xcode-version: "15.3"
+          runner: macos-14
+        - swift-version: "5.9"
+          xcode-version: "15.0"
+          runner: macos-14
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    - name: Install Swift
-      run: |
-        curl -O https://download.swift.org/swiftly/darwin/swiftly.pkg
-        installer -pkg swiftly.pkg -target CurrentUserHomeDirectory
-        ~/.swiftly/bin/swiftly init --skip-install --quiet-shell-followup
-        . "${SWIFTLY_HOME_DIR:-$HOME/.swiftly}/env.sh"
-        hash -r
-        swiftly install
-        swift --version
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode-version }}.app
     - name: Build and run tests
-      run: swift test -Xswiftc -warnings-as-errors
+      run: |
+        xcrun swift --version
+        if [[ "${{ matrix.swift-version }}" == 6.* ]]; then
+          xcrun swift test -Xswiftc -warnings-as-errors
+        else
+          xcrun swift build -Xswiftc -warnings-as-errors
+        fi
   swift-tests-ubuntu:
-    name: Swift tests (Ubuntu)
+    name: Swift ${{ matrix.swift-version }} (Linux)
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        swift-version:
+        - "6.1"
+        - "6.0"
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-    - name: Install Swift
+    - name: Install Swift and run tests
       run: |
         sudo apt-get -y install libcurl4-openssl-dev
         curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz
@@ -86,7 +107,6 @@ jobs:
         ./swiftly init --skip-install --quiet-shell-followup
         . "${SWIFTLY_HOME_DIR:-$HOME/.local/share/swiftly}/env.sh"
         hash -r
-        swiftly install
-        swift --version
-    - name: Build and run tests
-      run: swift test -Xswiftc -warnings-as-errors
+        swiftly install --use ${{ matrix.swift-version }}
+        swiftly run swift --version
+        swiftly run swift test -Xswiftc -warnings-as-errors
