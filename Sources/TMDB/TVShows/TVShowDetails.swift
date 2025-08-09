@@ -31,7 +31,12 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var type: String
   public var voteAverage: Double
   public var voteCount: Int
+  public var images: MediaImages?
+  public var credits: MediaCredits?
+  public var videos: MediaVideos?
+  public var seasons: [MediaSeason]?
   public var similar: Page<TVShow>?
+  public var recommendations: Page<TVShow>?
 
   public init(
     adult: Bool,
@@ -60,7 +65,12 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     type: String,
     voteAverage: Double,
     voteCount: Int,
-    similar: Page<TVShow>?
+    images: MediaImages?,
+    credits: MediaCredits?,
+    videos: MediaVideos?,
+    seasons: [MediaSeason]?,
+    similar: Page<TVShow>?,
+    recommendations: Page<TVShow>?
   ) {
     self.adult = adult
     self.backdropPath = backdropPath
@@ -88,7 +98,12 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     self.type = type
     self.voteAverage = voteAverage
     self.voteCount = voteCount
+    self.images = images
+    self.credits = credits
+    self.videos = videos
+    self.seasons = seasons
     self.similar = similar
+    self.recommendations = recommendations
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -118,6 +133,11 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     case type
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
+    case images
+    case credits
+    case videos
+    case seasons
     case similar
+    case recommendations
   }
 }

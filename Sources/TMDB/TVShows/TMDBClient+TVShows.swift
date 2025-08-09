@@ -7,9 +7,21 @@ import Foundation
 extension TMDBClient {
   public func tvShowDetails(
     id: TVShow.ID,
+    language: String? = nil,
+    includeImageLanguage: String? = nil,
+    includeVideoLanguage: String? = nil,
     appending: [TVShowDetailsAppendingOptions] = TVShowDetailsAppendingOptions.allCases
   ) async throws -> TVShowDetails {
     var queryItems: [URLQueryItem] = []
+    if let language = language {
+      queryItems.append(URLQueryItem(name: "language", value: language))
+    }
+    if let includeImageLanguage = includeImageLanguage {
+      queryItems.append(URLQueryItem(name: "include_image_language", value: includeImageLanguage))
+    }
+    if let includeVideoLanguage = includeVideoLanguage {
+      queryItems.append(URLQueryItem(name: "include_video_language", value: includeVideoLanguage))
+    }
     if !appending.isEmpty {
       let value = appending.map(\.rawValue).joined(separator: ",")
       queryItems.append(URLQueryItem(name: "append_to_response", value: value))
