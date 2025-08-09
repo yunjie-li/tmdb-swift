@@ -114,12 +114,6 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   }
 }
 
-extension Media.MediaID: ExpressibleByIntegerLiteral {
-  public init(integerLiteral value: Int) {
-    self = .movie(Movie.ID(rawValue: value))
-  }
-}
-
 public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var id: Media.MediaID
   public var mediaType: Media.MediaType
