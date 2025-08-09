@@ -9,24 +9,61 @@ extension TMDBClient {
     id: Media.MediaID,
     language: String? = nil,
     includeImageLanguage: String? = nil,
-    includeVideoLanguage: String? = nil
+    includeVideoLanguage: String? = nil,
+    appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
   ) async throws -> MediaDetail {
     switch id {
     case .movie(let movieID):
+      let movieAppending = appending.map { $0.movieOption }
       return try await movieDetails(
         id: movieID,
         language: language,
         includeImageLanguage: includeImageLanguage,
-        includeVideoLanguage: includeVideoLanguage
+        includeVideoLanguage: includeVideoLanguage,
+        appending: movieAppending
       )
     case .tvShow(let tvShowID):
+      let tvShowAppending = appending.map { $0.tvShowOption }
       return try await tvShowDetails(
         id: tvShowID,
         language: language,
         includeImageLanguage: includeImageLanguage,
-        includeVideoLanguage: includeVideoLanguage
+        includeVideoLanguage: includeVideoLanguage,
+        appending: tvShowAppending
       )
     }
+  }
+  
+  public func mediaDetails(
+    movieID: Int,
+    language: String? = nil,
+    includeImageLanguage: String? = nil,
+    includeVideoLanguage: String? = nil,
+    appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
+  ) async throws -> MediaDetail {
+    return try await mediaDetails(
+      id: .movie(movieID),
+      language: language,
+      includeImageLanguage: includeImageLanguage,
+      includeVideoLanguage: includeVideoLanguage,
+      appending: appending
+    )
+  }
+  
+  public func mediaDetails(
+    tvShowID: Int,
+    language: String? = nil,
+    includeImageLanguage: String? = nil,
+    includeVideoLanguage: String? = nil,
+    appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
+  ) async throws -> MediaDetail {
+    return try await mediaDetails(
+      id: .tvShow(tvShowID),
+      language: language,
+      includeImageLanguage: includeImageLanguage,
+      includeVideoLanguage: includeVideoLanguage,
+      appending: appending
+    )
   }
   
   public func mediaList(

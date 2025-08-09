@@ -16,6 +16,22 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
         return id.rawValue
       }
     }
+    
+    public static func movie(_ id: Int) -> MediaID {
+      return .movie(Movie.ID(rawValue: id))
+    }
+    
+    public static func tvShow(_ id: Int) -> MediaID {
+      return .tvShow(TVShow.ID(rawValue: id))
+    }
+    
+    public init(movieID: Int) {
+      self = .movie(Movie.ID(rawValue: movieID))
+    }
+    
+    public init(tvShowID: Int) {
+      self = .tvShow(TVShow.ID(rawValue: tvShowID))
+    }
   }
   
   public var id: MediaID
