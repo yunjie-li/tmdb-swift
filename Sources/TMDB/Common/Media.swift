@@ -162,10 +162,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var images: MediaImages?
   public var credits: MediaCredits?
   public var videos: MediaVideos?
-  public var similarMovies: Page<Movie>?
-  public var recommendationsMovies: Page<Movie>?
-  public var similarTVShows: Page<TVShow>?
-  public var recommendationsTVShows: Page<TVShow>?
+  public var similar: Page<Media>?
+  public var recommendations: Page<Media>?
   
   public init(
     id: Media.MediaID,
@@ -206,10 +204,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     images: MediaImages?,
     credits: MediaCredits?,
     videos: MediaVideos?,
-    similarMovies: Page<Movie>?,
-    recommendationsMovies: Page<Movie>?,
-    similarTVShows: Page<TVShow>?,
-    recommendationsTVShows: Page<TVShow>?
+    similar: Page<Media>?,
+    recommendations: Page<Media>?
   ) {
     self.id = id
     self.mediaType = mediaType
@@ -249,10 +245,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     self.images = images
     self.credits = credits
     self.videos = videos
-    self.similarMovies = similarMovies
-    self.recommendationsMovies = recommendationsMovies
-    self.similarTVShows = similarTVShows
-    self.recommendationsTVShows = recommendationsTVShows
+    self.similar = similar
+    self.recommendations = recommendations
   }
   
   public init(from movieDetails: MovieDetails) {
@@ -295,10 +289,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       images: movieDetails.images,
       credits: movieDetails.credits,
       videos: movieDetails.videos,
-      similarMovies: movieDetails.similar,
-      recommendationsMovies: movieDetails.recommendations,
-      similarTVShows: nil,
-      recommendationsTVShows: nil
+      similar: movieDetails.similar?.toMediaPage(),
+      recommendations: movieDetails.recommendations?.toMediaPage()
     )
   }
   
@@ -342,10 +334,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       images: tvShowDetails.images,
       credits: tvShowDetails.credits,
       videos: tvShowDetails.videos,
-      similarMovies: nil,
-      recommendationsMovies: nil,
-      similarTVShows: tvShowDetails.similar,
-      recommendationsTVShows: tvShowDetails.recommendations
+      similar: tvShowDetails.similar?.toMediaPage(),
+      recommendations: tvShowDetails.recommendations?.toMediaPage()
     )
   }
   
@@ -389,10 +379,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       images: nil,
       credits: nil,
       videos: nil,
-      similarMovies: nil,
-      recommendationsMovies: nil,
-      similarTVShows: nil,
-      recommendationsTVShows: nil
+      similar: nil,
+      recommendations: nil
     )
   }
   
@@ -436,10 +424,30 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       images: nil,
       credits: nil,
       videos: nil,
-      similarMovies: nil,
-      recommendationsMovies: nil,
-      similarTVShows: nil,
-      recommendationsTVShows: nil
+      similar: nil,
+      recommendations: nil
+    )
+  }
+}
+
+extension Page where T == Movie {
+  func toMediaPage() -> Page<Media> {
+    return Page<Media>(
+      page: self.page,
+      results: self.results.map { Media(from: $0) },
+      totalPages: self.totalPages,
+      totalResults: self.totalResults
+    )
+  }
+}
+
+extension Page where T == TVShow {
+  func toMediaPage() -> Page<Media> {
+    return Page<Media>(
+      page: self.page,
+      results: self.results.map { Media(from: $0) },
+      totalPages: self.totalPages,
+      totalResults: self.totalResults
     )
   }
 }
