@@ -94,6 +94,26 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
       originCountry: tvShow.originCountry
     )
   }
+  
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case mediaType = "media_type"
+    case adult
+    case backdropPath = "backdrop_path"
+    case genreIds = "genre_ids"
+    case originalLanguage = "original_language"
+    case originalTitle = "original_itle"
+    case title
+    case overview
+    case popularity
+    case posterPath = "poster_path"
+    case releaseDate = "release_date"
+    case voteAverage = "vote_average"
+    case voteCount = "vote_count"
+    case video
+    case originCountry = "origin_country"
+  }
+  
 }
 
 public enum MediaType: String, Codable, Sendable {
@@ -417,6 +437,51 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       rating: nil
     )
   }
+  
+  private enum CodingKeys: String, CodingKey {
+    case id
+    case mediaType = "media_type"
+    case adult
+    case backdropPath = "backdrop_path"
+    case genreIds = "genre_ids"
+    case genres
+    case originalLanguage = "original_language"
+    case originalTitle = "original_title"
+    case title
+    case overview
+    case popularity
+    case posterPath = "poster_path"
+    case releaseDate = "release_date"
+    case voteAverage = "vote_average"
+    case voteCount = "vote_count"
+    case video
+    case originCountry = "origin_country"
+    case belongsToCollection = "belongs_to_collection"
+    case budget
+    case homepage
+    case imdbID = "imdb_id"
+    case productionCompanies = "production_companies"
+    case productionCountries = "production_countries"
+    case revenue
+    case runtime
+    case spokenLanguages = "spoken_languages"
+    case status
+    case tagline = "tag_line"
+    case inProduction = "is_production"
+    case languages
+    case lastAirDate = "last_air_date"
+    case numberOfEpisodes = "number_of_episodes"
+    case numberOfSeasons = "number_of_seasons"
+    case type
+    case seasons
+    case images
+    case credits
+    case videos
+    case similar
+    case recommendations
+    case rating
+  }
+  
 }
 
 extension Page where T == Movie {
