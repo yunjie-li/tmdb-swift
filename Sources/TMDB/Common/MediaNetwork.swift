@@ -16,7 +16,7 @@ public struct MediaNetwork: Codable, Hashable, Sendable, Equatable, Identifiable
     return lhs.id == rhs.id
   }
   
-  private enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case id
     case logoPath = "logo_path"
     case name

@@ -19,7 +19,7 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
   public var creditId: String?
   public var order: Int?
   
-  private enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case id
     case name
     case originalName = "original_name"

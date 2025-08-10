@@ -22,7 +22,7 @@ public struct MediaVideo: Codable, Hashable, Sendable, Equatable, Identifiable {
     return lhs.id == rhs.id
   }
   
-  private enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case lang = "iso_639_1"
     case name
     case key

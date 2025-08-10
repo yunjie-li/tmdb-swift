@@ -15,7 +15,7 @@ public struct MediaImage: Codable, Hashable, Sendable {
     public var voteCount: Int
     public var width: Int
   
-  private enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case aspectRatio = "aspect_ratio"
     case height
     case lang = "iso_639_1"
