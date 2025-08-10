@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MediaVideo: Codable, Hashable, Sendable, Equatable {
+public struct MediaVideo: Codable, Hashable, Sendable, Equatable, Identifiable {
   public var lang: String?
   public var name: String
   public var key: String

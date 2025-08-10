@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public struct MediaNetwork: Codable, Hashable, Sendable, Equatable {
+public struct MediaNetwork: Codable, Hashable, Sendable, Equatable, Identifiable {
   public var id: Int
   public var logoPath: String
   public var name: String

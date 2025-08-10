@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public struct MediaCredit: Codable, Hashable, Sendable {
+public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
   public var id: Int
   public var name: String
   public var originalName: String?

@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public struct MediaSeason: Codable, Hashable, Sendable, Equatable {
+public struct MediaSeason: Codable, Hashable, Sendable, Equatable, Identifiable {
   public var airDate: String?
   public var episodeCount: Int
   public var id: Int
