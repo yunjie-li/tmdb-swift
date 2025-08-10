@@ -172,8 +172,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var images: MediaImages?
   public var credits: MediaCredits?
   public var videos: MediaVideos?
-  public var similar: Page<Media>?
-  public var recommendations: Page<Media>?
+  public var similar: Page<MediaDetail>?
+  public var recommendations: Page<MediaDetail>?
   
   public init(
     id: Media.MediaID,
@@ -214,8 +214,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     images: MediaImages?,
     credits: MediaCredits?,
     videos: MediaVideos?,
-    similar: Page<Media>?,
-    recommendations: Page<Media>?
+    similar: Page<MediaDetail>?,
+    recommendations: Page<MediaDetail>?
   ) {
     self.id = id
     self.mediaType = mediaType
@@ -441,10 +441,10 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
 }
 
 extension Page where T == Movie {
-  func toMediaPage() -> Page<Media> {
-    return Page<Media>(
+  func toMediaPage() -> Page<MediaDetail> {
+    return Page<MediaDetail>(
       page: self.page,
-      results: self.results.map { Media(from: $0) },
+      results: self.results.map { MediaDetail(from: $0) },
       totalPages: self.totalPages,
       totalResults: self.totalResults
     )
@@ -452,10 +452,10 @@ extension Page where T == Movie {
 }
 
 extension Page where T == TVShow {
-  func toMediaPage() -> Page<Media> {
-    return Page<Media>(
+  func toMediaPage() -> Page<MediaDetail> {
+    return Page<MediaDetail>(
       page: self.page,
-      results: self.results.map { Media(from: $0) },
+      results: self.results.map { MediaDetail(from: $0) },
       totalPages: self.totalPages,
       totalResults: self.totalResults
     )
