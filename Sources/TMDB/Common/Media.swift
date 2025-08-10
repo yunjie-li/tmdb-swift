@@ -175,6 +175,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var similar: Page<MediaDetail>?
   public var recommendations: Page<MediaDetail>?
   
+  public var rating: MediaRating?
+  
   public init(
     id: Media.MediaID,
     mediaType: Media.MediaType,
@@ -215,7 +217,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     credits: MediaCredits?,
     videos: MediaVideos?,
     similar: Page<MediaDetail>?,
-    recommendations: Page<MediaDetail>?
+    recommendations: Page<MediaDetail>?,
+    rating: MediaRating?
   ) {
     self.id = id
     self.mediaType = mediaType
@@ -257,6 +260,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     self.videos = videos
     self.similar = similar
     self.recommendations = recommendations
+    self.rating = rating
   }
   
   public init(from movieDetails: MovieDetails) {
@@ -300,7 +304,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       credits: movieDetails.credits,
       videos: movieDetails.videos,
       similar: movieDetails.similar?.toMediaPage(),
-      recommendations: movieDetails.recommendations?.toMediaPage()
+      recommendations: movieDetails.recommendations?.toMediaPage(),
+      rating: nil
     )
   }
   
@@ -345,7 +350,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       credits: tvShowDetails.credits,
       videos: tvShowDetails.videos,
       similar: tvShowDetails.similar?.toMediaPage(),
-      recommendations: tvShowDetails.recommendations?.toMediaPage()
+      recommendations: tvShowDetails.recommendations?.toMediaPage(),
+      rating: nil
     )
   }
   
@@ -390,7 +396,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       credits: nil,
       videos: nil,
       similar: nil,
-      recommendations: nil
+      recommendations: nil,
+      rating: nil
     )
   }
   
@@ -435,7 +442,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       credits: nil,
       videos: nil,
       similar: nil,
-      recommendations: nil
+      recommendations: nil,
+      rating: nil
     )
   }
 }
