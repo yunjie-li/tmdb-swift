@@ -7,14 +7,14 @@
 import Foundation
 
 public struct MediaSeason: Codable, Hashable, Sendable, Equatable {
-  let airDate: String?
-  let episodeCount: Int
-  let id: Int
-  let name: String
-  let overview: String
-  let posterPath: String?
-  let seasonNumber: Int
-  let voteAverage: Double
+  public var airDate: String?
+  public var episodeCount: Int
+  public var id: Int
+  public var name: String
+  public var overview: String
+  public var posterPath: String?
+  public var seasonNumber: Int
+  public var voteAverage: Double
   
   public static func == (lhs: MediaSeason, rhs: MediaSeason) -> Bool {
     return lhs.id == rhs.id

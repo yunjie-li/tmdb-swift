@@ -8,15 +8,15 @@
 import Foundation
 
 public struct MediaVideo: Codable, Hashable, Sendable, Equatable {
-  let lang: String?
-  let name: String
-  let key: String
-  let site: String
-  let size: Double?
-  let type: String
-  let official: Bool?
-  let publishedAt: String?
-  let id: String
+  public var lang: String?
+  public var name: String
+  public var key: String
+  public var site: String
+  public var size: Double?
+  public var type: String
+  public var official: Bool?
+  public var publishedAt: String?
+  public var id: String
   
   public static func == (lhs: MediaVideo, rhs: MediaVideo) -> Bool {
     return lhs.id == rhs.id
@@ -36,5 +36,5 @@ public struct MediaVideo: Codable, Hashable, Sendable, Equatable {
 }
 
 public struct MediaVideos: Codable, Hashable, Sendable {
-  let results: [MediaVideo]?
+  public var results: [MediaVideo]?
 }

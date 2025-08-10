@@ -7,17 +7,17 @@
 import Foundation
 
 public struct MediaCredit: Codable, Hashable, Sendable {
-  let id: Int
-  let name: String
-  let originalName: String?
-  let character: String?
-  let profilePath: String?
-  let adult: Bool?
-  let gender: Int?
-  let knownForDepartment: String?
-  let popularity: Double?
-  let creditId: String?
-  let order: Int?
+  public var id: Int
+  public var name: String
+  public var originalName: String?
+  public var character: String?
+  public var profilePath: String?
+  public var adult: Bool?
+  public var gender: Int?
+  public var knownForDepartment: String?
+  public var popularity: Double?
+  public var creditId: String?
+  public var order: Int?
   
   private enum CodingKeys: String, CodingKey {
     case id
@@ -35,5 +35,5 @@ public struct MediaCredit: Codable, Hashable, Sendable {
 }
 
 public struct MediaCredits: Codable, Hashable, Sendable {
-    let cast: [MediaCredit]?
+    public var cast: [MediaCredit]?
 }

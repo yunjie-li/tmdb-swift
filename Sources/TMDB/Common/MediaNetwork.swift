@@ -7,10 +7,10 @@
 import Foundation
 
 public struct MediaNetwork: Codable, Hashable, Sendable, Equatable {
-  let id: Int
-  let logoPath: String
-  let name: String
-  let originCountry: String?
+  public var id: Int
+  public var logoPath: String
+  public var name: String
+  public var originCountry: String?
   
   public static func == (lhs: MediaNetwork, rhs: MediaNetwork) -> Bool {
     return lhs.id == rhs.id
