@@ -6,26 +6,27 @@ import Foundation
 
 extension TMDBClient {
   public func mediaDetails(
-    id: Media.MediaID,
+    id: Int,
+    mediaType: MediaType,
     language: String? = nil,
     includeImageLanguage: String? = nil,
     includeVideoLanguage: String? = nil,
     appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
   ) async throws -> MediaDetail {
-    switch id {
-    case .movie(let movieID):
+    switch mediaType {
+    case .movie:
       let movieAppending = appending.map { $0.movieOption }
       return try await movieDetails(
-        id: movieID,
+        id: id,
         language: language,
         includeImageLanguage: includeImageLanguage,
         includeVideoLanguage: includeVideoLanguage,
         appending: movieAppending
       )
-    case .tvShow(let tvShowID):
+    case .tvShow:
       let tvShowAppending = appending.map { $0.tvShowOption }
       return try await tvShowDetails(
-        id: tvShowID,
+        id: id,
         language: language,
         includeImageLanguage: includeImageLanguage,
         includeVideoLanguage: includeVideoLanguage,
@@ -36,13 +37,15 @@ extension TMDBClient {
   
   public func mediaDetails(
     movieID: Int,
+    mediaType: MediaType,
     language: String? = nil,
     includeImageLanguage: String? = nil,
     includeVideoLanguage: String? = nil,
     appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
   ) async throws -> MediaDetail {
     return try await mediaDetails(
-      id: .movie(movieID),
+      id: movieID,
+      mediaType: mediaType,
       language: language,
       includeImageLanguage: includeImageLanguage,
       includeVideoLanguage: includeVideoLanguage,
@@ -52,13 +55,15 @@ extension TMDBClient {
   
   public func mediaDetails(
     tvShowID: Int,
+    mediaType: MediaType,
     language: String? = nil,
     includeImageLanguage: String? = nil,
     includeVideoLanguage: String? = nil,
     appending: [MediaDetailsAppendingOptions] = MediaDetailsAppendingOptions.allCases
   ) async throws -> MediaDetail {
     return try await mediaDetails(
-      id: .tvShow(tvShowID),
+      id: tvShowID,
+      mediaType: mediaType,
       language: language,
       includeImageLanguage: includeImageLanguage,
       includeVideoLanguage: includeVideoLanguage,

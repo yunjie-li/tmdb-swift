@@ -37,7 +37,7 @@ public enum MediaList: Codable, Hashable, Sendable {
     }
   }
   
-  var mediaType: Media.MediaType {
+  var mediaType: MediaType {
     switch self {
     case .movie:
       return .movie

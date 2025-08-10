@@ -1,44 +1,10 @@
 public struct Media: Codable, Hashable, Identifiable, Sendable {
-  public enum MediaType: String, Codable, Sendable {
-    case movie
-    case tvShow = "tv"
-  }
   
-  public enum MediaID: Codable, Hashable, Sendable {
-    case movie(Movie.ID)
-    case tvShow(TVShow.ID)
-    
-    public var rawValue: Int {
-      switch self {
-      case .movie(let id):
-        return id.rawValue
-      case .tvShow(let id):
-        return id.rawValue
-      }
-    }
-    
-    public static func movie(_ id: Int) -> MediaID {
-      return .movie(Movie.ID(rawValue: id))
-    }
-    
-    public static func tvShow(_ id: Int) -> MediaID {
-      return .tvShow(TVShow.ID(rawValue: id))
-    }
-    
-    public init(movieID: Int) {
-      self = .movie(Movie.ID(rawValue: movieID))
-    }
-    
-    public init(tvShowID: Int) {
-      self = .tvShow(TVShow.ID(rawValue: tvShowID))
-    }
-  }
-  
-  public var id: MediaID
+  public var id: Int
   public var mediaType: MediaType
   public var adult: Bool
   public var backdropPath: BackdropPath?
-  public var genreIDs: [Genre.ID]?
+  public var genreIds: [Int]?
   public var originalLanguage: String
   public var originalTitle: String
   public var title: String
@@ -52,11 +18,11 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   public var originCountry: [String]?
   
   public init(
-    id: MediaID,
+    id: Int,
     mediaType: MediaType,
     adult: Bool,
     backdropPath: BackdropPath?,
-    genreIDs: [Genre.ID]?,
+    genreIds: [Int]?,
     originalLanguage: String,
     originalTitle: String,
     title: String,
@@ -73,7 +39,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     self.mediaType = mediaType
     self.adult = adult
     self.backdropPath = backdropPath
-    self.genreIDs = genreIDs
+    self.genreIds = genreIds
     self.originalLanguage = originalLanguage
     self.originalTitle = originalTitle
     self.title = title
@@ -89,11 +55,11 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   
   public init(from movie: Movie) {
     self.init(
-      id: .movie(movie.id),
+      id: movie.id,
       mediaType: .movie,
       adult: movie.adult,
       backdropPath: movie.backdropPath,
-      genreIDs: movie.genreIDs,
+      genreIds: movie.genreIds,
       originalLanguage: movie.originalLanguage,
       originalTitle: movie.originalTitle,
       title: movie.title,
@@ -110,11 +76,11 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   
   public init(from tvShow: TVShow) {
     self.init(
-      id: .tvShow(tvShow.id),
+      id: tvShow.id,
       mediaType: .tvShow,
       adult: tvShow.adult,
       backdropPath: tvShow.backdropPath,
-      genreIDs: tvShow.genreIDs,
+      genreIds: tvShow.genreIds,
       originalLanguage: tvShow.originalLanguage,
       originalTitle: tvShow.originalName,
       title: tvShow.name,
@@ -130,12 +96,17 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   }
 }
 
+public enum MediaType: String, Codable, Sendable {
+  case movie
+  case tvShow = "tv"
+}
+
 public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
-  public var id: Media.MediaID
-  public var mediaType: Media.MediaType
+  public var id: Int
+  public var mediaType: MediaType
   public var adult: Bool
   public var backdropPath: BackdropPath?
-  public var genreIDs: [Genre.ID]?
+  public var genreIds: [Int]?
   public var genres: [Genre]?
   public var originalLanguage: String
   public var originalTitle: String
@@ -178,11 +149,11 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var rating: MediaRating?
   
   public init(
-    id: Media.MediaID,
-    mediaType: Media.MediaType,
+    id: Int,
+    mediaType: MediaType,
     adult: Bool,
     backdropPath: BackdropPath?,
-    genreIDs: [Genre.ID]?,
+    genreIds: [Int]?,
     genres: [Genre]?,
     originalLanguage: String,
     originalTitle: String,
@@ -224,7 +195,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     self.mediaType = mediaType
     self.adult = adult
     self.backdropPath = backdropPath
-    self.genreIDs = genreIDs
+    self.genreIds = genreIds
     self.genres = genres
     self.originalLanguage = originalLanguage
     self.originalTitle = originalTitle
@@ -265,11 +236,11 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   
   public init(from movieDetails: MovieDetails) {
     self.init(
-      id: .movie(movieDetails.id),
+      id: movieDetails.id,
       mediaType: .movie,
       adult: movieDetails.adult,
       backdropPath: movieDetails.backdropPath,
-      genreIDs: nil,
+      genreIds: nil,
       genres: movieDetails.genres,
       originalLanguage: movieDetails.originalLanguage,
       originalTitle: movieDetails.originalTitle,
@@ -311,11 +282,11 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   
   public init(from tvShowDetails: TVShowDetails) {
     self.init(
-      id: .tvShow(tvShowDetails.id),
+      id: tvShowDetails.id,
       mediaType: .tvShow,
       adult: tvShowDetails.adult,
       backdropPath: tvShowDetails.backdropPath,
-      genreIDs: nil,
+      genreIds: nil,
       genres: tvShowDetails.genres,
       originalLanguage: tvShowDetails.originalLanguage,
       originalTitle: tvShowDetails.originalName,
@@ -357,11 +328,11 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   
   public init(from movie: Movie) {
     self.init(
-      id: .movie(movie.id),
+      id: movie.id,
       mediaType: .movie,
       adult: movie.adult,
       backdropPath: movie.backdropPath,
-      genreIDs: movie.genreIDs,
+      genreIds: movie.genreIds,
       genres: nil,
       originalLanguage: movie.originalLanguage,
       originalTitle: movie.originalTitle,
@@ -403,11 +374,11 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   
   public init(from tvShow: TVShow) {
     self.init(
-      id: .tvShow(tvShow.id),
+      id: tvShow.id,
       mediaType: .tvShow,
       adult: tvShow.adult,
       backdropPath: tvShow.backdropPath,
-      genreIDs: tvShow.genreIDs,
+      genreIds: tvShow.genreIds,
       genres: nil,
       originalLanguage: tvShow.originalLanguage,
       originalTitle: tvShow.originalName,

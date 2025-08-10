@@ -23,7 +23,7 @@ public enum TVShowList: Codable, Hashable, Sendable {
     case .topRated:
       "tv/top_rated"
     case .similar(let id):
-      "tv/\(id.rawValue)/similar"
+      "tv/\(id)/similar"
     case .trending(let timeWindow):
       "trending/tv/\(timeWindow.rawValue)"
     }

@@ -1,8 +1,8 @@
 public struct TVShow: Codable, Hashable, Identifiable, Sendable {
   public var adult: Bool
   public var backdropPath: BackdropPath?
-  public var genreIDs: [Genre.ID]
-  public var id: ID
+  public var genreIds: [Int]
+  public var id: Int
   public var originCountry: [String]
   public var originalLanguage: String
   public var originalName: String
@@ -17,8 +17,8 @@ public struct TVShow: Codable, Hashable, Identifiable, Sendable {
   public init(
     adult: Bool,
     backdropPath: BackdropPath?,
-    genreIDs: [Genre.ID],
-    id: ID,
+    genreIds: [Int],
+    id: Int,
     originCountry: [String],
     originalLanguage: String,
     originalName: String,
@@ -32,7 +32,7 @@ public struct TVShow: Codable, Hashable, Identifiable, Sendable {
   ) {
     self.adult = adult
     self.backdropPath = backdropPath
-    self.genreIDs = genreIDs
+    self.genreIds = genreIds
     self.id = id
     self.originCountry = originCountry
     self.originalLanguage = originalLanguage
@@ -46,18 +46,10 @@ public struct TVShow: Codable, Hashable, Identifiable, Sendable {
     self.voteCount = voteCount
   }
 
-  public struct ID: Codable, Hashable, RawRepresentable, Sendable {
-    public var rawValue: Int
-
-    public init(rawValue: Int) {
-      self.rawValue = rawValue
-    }
-  }
-
   private enum CodingKeys: String, CodingKey {
     case adult
     case backdropPath = "backdrop_path"
-    case genreIDs = "genre_ids"
+    case genreIds = "genre_ids"
     case id
     case originCountry = "origin_country"
     case originalLanguage = "original_language"
@@ -69,11 +61,5 @@ public struct TVShow: Codable, Hashable, Identifiable, Sendable {
     case name
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
-  }
-}
-
-extension TVShow.ID: ExpressibleByIntegerLiteral {
-  public init(integerLiteral value: Int) {
-    self.rawValue = value
   }
 }

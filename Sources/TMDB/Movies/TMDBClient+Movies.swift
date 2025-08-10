@@ -27,7 +27,7 @@ extension TMDBClient {
       queryItems.append(URLQueryItem(name: "append_to_response", value: value))
     }
     let urlRequest = try urlRequest(
-      relativePath: "movie/\(id.rawValue)",
+      relativePath: "movie/\(id)",
       queryItems: queryItems.isEmpty ? nil : queryItems
     )
     let response = try await performRequest(urlRequest)

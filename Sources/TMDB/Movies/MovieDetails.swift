@@ -5,7 +5,7 @@ public struct MovieDetails: Codable, Hashable, Identifiable, Sendable {
   public var budget: Int
   public var genres: [Genre]
   public var homepage: String?
-  public var id: Movie.ID
+  public var id: Int
   public var imdbID: String?
   public var originCountry: [String]?
   public var originalLanguage: String
@@ -38,7 +38,7 @@ public struct MovieDetails: Codable, Hashable, Identifiable, Sendable {
     budget: Int,
     genres: [Genre],
     homepage: String?,
-    id: Movie.ID,
+    id: Int,
     imdbID: String?,
     originCountry: [String]?,
     originalLanguage: String,

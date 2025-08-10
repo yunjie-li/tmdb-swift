@@ -6,7 +6,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var firstAirDate: String
   public var genres: [Genre]
   public var homepage: String
-  public var id: TVShow.ID
+  public var id: Int
   public var inProduction: Bool
   public var languages: [String]
   public var lastAirDate: String?
@@ -44,7 +44,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     firstAirDate: String,
     genres: [Genre],
     homepage: String,
-    id: TVShow.ID,
+    id: Int,
     inProduction: Bool,
     languages: [String],
     lastAirDate: String?,

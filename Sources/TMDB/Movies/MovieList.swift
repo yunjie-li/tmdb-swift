@@ -23,7 +23,7 @@ public enum MovieList: Codable, Hashable, Sendable {
     case .upcoming:
       "movie/upcoming"
     case .similar(let id):
-      "movie/\(id.rawValue)/similar"
+      "movie/\(id)/similar"
     case .trending(let timeWindow):
       "trending/movie/\(timeWindow.rawValue)"
     }
