@@ -77,7 +77,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   public init(from tvShow: TVShow) {
     self.init(
       id: tvShow.id,
-      mediaType: .tvShow,
+      mediaType: .tv,
       adult: tvShow.adult,
       backdropPath: tvShow.backdropPath,
       genreIds: tvShow.genreIds,
@@ -98,7 +98,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
 
 public enum MediaType: String, Codable, Sendable {
   case movie
-  case tvShow = "tv"
+  case tv
 }
 
 public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
@@ -283,7 +283,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public init(from tvShowDetails: TVShowDetails) {
     self.init(
       id: tvShowDetails.id,
-      mediaType: .tvShow,
+      mediaType: .tv,
       adult: tvShowDetails.adult,
       backdropPath: tvShowDetails.backdropPath,
       genreIds: nil,
@@ -375,7 +375,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public init(from tvShow: TVShow) {
     self.init(
       id: tvShow.id,
-      mediaType: .tvShow,
+      mediaType: .tv,
       adult: tvShow.adult,
       backdropPath: tvShow.backdropPath,
       genreIds: tvShow.genreIds,

@@ -23,7 +23,7 @@ extension TMDBClient {
         includeVideoLanguage: includeVideoLanguage,
         appending: movieAppending
       )
-    case .tvShow:
+    case .tv:
       let tvShowAppending = appending.map { $0.tvShowOption }
       return try await tvShowDetails(
         id: id,
@@ -97,7 +97,7 @@ extension TMDBClient {
           totalPages: moviePage.totalPages,
           totalResults: moviePage.totalResults
         )
-      case .tvShow:
+      case .tv:
         let tvShowPage = try decoder.decode(Page<TVShow>.self, from: response.data)
         let mediaDetails = tvShowPage.results.map { MediaDetail(from: $0) }
         return Page<MediaDetail>(
