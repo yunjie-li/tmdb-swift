@@ -17,11 +17,11 @@ public struct MediaVideo: Codable, Hashable, Sendable, Equatable, Identifiable {
   public var official: Bool?
   public var publishedAt: String?
   public var id: String
-  
+
   public static func == (lhs: MediaVideo, rhs: MediaVideo) -> Bool {
     return lhs.id == rhs.id
   }
-  
+
   public enum CodingKeys: String, CodingKey {
     case lang = "iso_639_1"
     case name

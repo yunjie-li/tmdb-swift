@@ -18,7 +18,7 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
   public var popularity: Double?
   public var creditId: String?
   public var order: Int?
-  
+
   public enum CodingKeys: String, CodingKey {
     case id
     case name
@@ -35,5 +35,5 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
 }
 
 public struct MediaCredits: Codable, Hashable, Sendable {
-    public var cast: [MediaCredit]?
+  public var cast: [MediaCredit]?
 }

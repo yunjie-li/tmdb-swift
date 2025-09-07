@@ -34,7 +34,7 @@ extension TMDBClient {
       )
     }
   }
-  
+
   public func mediaDetails(
     movieID: Int,
     mediaType: MediaType,
@@ -52,7 +52,7 @@ extension TMDBClient {
       appending: appending
     )
   }
-  
+
   public func mediaDetails(
     tvShowID: Int,
     mediaType: MediaType,
@@ -70,7 +70,7 @@ extension TMDBClient {
       appending: appending
     )
   }
-  
+
   public func mediaList(
     _ list: MediaList,
     language: String? = nil
@@ -79,13 +79,13 @@ extension TMDBClient {
     if let language = language {
       queryItems.append(URLQueryItem(name: "language", value: language))
     }
-    
+
     let urlRequest = try urlRequest(
       relativePath: list.relativePath,
       queryItems: queryItems.isEmpty ? nil : queryItems
     )
     let response = try await performRequest(urlRequest)
-    
+
     if response.statusCode == 200 {
       switch list.mediaType {
       case .movie:
@@ -107,6 +107,56 @@ extension TMDBClient {
           totalResults: tvShowPage.totalResults
         )
       }
+    } else {
+      throw try decoder.decode(TMDBError.self, from: response.data)
+    }
+  }
+
+  public func discoverMovies(
+    parameters: DiscoverParameters = DiscoverParameters()
+  ) async throws -> Page<MediaDetail> {
+    let queryItems = parameters.toQueryItems()
+
+    let urlRequest = try urlRequest(
+      relativePath: "discover/movie",
+      queryItems: queryItems.isEmpty ? nil : queryItems
+    )
+    let response = try await performRequest(urlRequest)
+
+    if response.statusCode == 200 {
+      let moviePage = try decoder.decode(Page<Movie>.self, from: response.data)
+      let mediaDetails = moviePage.results.map { MediaDetail(from: $0) }
+      return Page<MediaDetail>(
+        page: moviePage.page,
+        results: mediaDetails,
+        totalPages: moviePage.totalPages,
+        totalResults: moviePage.totalResults
+      )
+    } else {
+      throw try decoder.decode(TMDBError.self, from: response.data)
+    }
+  }
+
+  public func discoverTVShows(
+    parameters: DiscoverParameters = DiscoverParameters()
+  ) async throws -> Page<MediaDetail> {
+    let queryItems = parameters.toQueryItems()
+
+    let urlRequest = try urlRequest(
+      relativePath: "discover/tv",
+      queryItems: queryItems.isEmpty ? nil : queryItems
+    )
+    let response = try await performRequest(urlRequest)
+
+    if response.statusCode == 200 {
+      let tvShowPage = try decoder.decode(Page<TVShow>.self, from: response.data)
+      let mediaDetails = tvShowPage.results.map { MediaDetail(from: $0) }
+      return Page<MediaDetail>(
+        page: tvShowPage.page,
+        results: mediaDetails,
+        totalPages: tvShowPage.totalPages,
+        totalResults: tvShowPage.totalResults
+      )
     } else {
       throw try decoder.decode(TMDBError.self, from: response.data)
     }

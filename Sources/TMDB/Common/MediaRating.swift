@@ -14,7 +14,7 @@ public struct MediaRating: Codable, Hashable, Sendable {
   public var trakt: Double?
   public var tmdb: Double?
   public var letterboxd: Double?
-  
+
   public init(
     imdb: Double? = nil,
     metacritic: Double? = nil,
@@ -32,7 +32,7 @@ public struct MediaRating: Codable, Hashable, Sendable {
     self.tmdb = tmdb
     self.letterboxd = letterboxd
   }
-  
+
   public enum CodingKeys: String, CodingKey {
     case imdb
     case metacritic

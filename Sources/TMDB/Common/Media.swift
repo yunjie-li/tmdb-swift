@@ -1,5 +1,5 @@
 public struct Media: Codable, Hashable, Identifiable, Sendable {
-  
+
   public var id: Int
   public var mediaType: MediaType
   public var adult: Bool
@@ -16,7 +16,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   public var voteCount: Int?
   public var video: Bool?
   public var originCountry: [String]?
-  
+
   public init(
     id: Int,
     mediaType: MediaType,
@@ -52,7 +52,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     self.video = video
     self.originCountry = originCountry
   }
-  
+
   public init(from movie: Movie) {
     self.init(
       id: movie.id,
@@ -73,7 +73,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
       originCountry: nil
     )
   }
-  
+
   public init(from tvShow: TVShow) {
     self.init(
       id: tvShow.id,
@@ -94,7 +94,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
       originCountry: tvShow.originCountry
     )
   }
-  
+
   private enum CodingKeys: String, CodingKey {
     case id
     case mediaType = "media_type"
@@ -113,7 +113,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     case video
     case originCountry = "origin_country"
   }
-  
+
 }
 
 public enum MediaType: String, Codable, Sendable {
@@ -139,7 +139,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var voteCount: Int
   public var video: Bool?
   public var originCountry: [String]?
-  
+
   public var belongsToCollection: MovieCollection?
   public var budget: Int?
   public var homepage: String?
@@ -151,7 +151,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var spokenLanguages: [Language]?
   public var status: String?
   public var tagline: String?
-  
+
   public var inProduction: Bool?
   public var languages: [String]?
   public var lastAirDate: String?
@@ -159,15 +159,15 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var numberOfSeasons: Int?
   public var type: String?
   public var seasons: [MediaSeason]?
-  
+
   public var images: MediaImages?
   public var credits: MediaCredits?
   public var videos: MediaVideos?
   public var similar: Page<MediaDetail>?
   public var recommendations: Page<MediaDetail>?
-  
+
   public var rating: MediaRating?
-  
+
   public init(
     id: Int,
     mediaType: MediaType,
@@ -253,7 +253,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     self.recommendations = recommendations
     self.rating = rating
   }
-  
+
   public init(from movieDetails: MovieDetails) {
     self.init(
       id: movieDetails.id,
@@ -299,7 +299,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       rating: nil
     )
   }
-  
+
   public init(from tvShowDetails: TVShowDetails) {
     self.init(
       id: tvShowDetails.id,
@@ -345,7 +345,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       rating: nil
     )
   }
-  
+
   public init(from movie: Movie) {
     self.init(
       id: movie.id,
@@ -391,7 +391,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       rating: nil
     )
   }
-  
+
   public init(from tvShow: TVShow) {
     self.init(
       id: tvShow.id,
@@ -437,7 +437,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       rating: nil
     )
   }
-  
+
   private enum CodingKeys: String, CodingKey {
     case id
     case mediaType = "media_type"
@@ -481,7 +481,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     case recommendations
     case rating
   }
-  
+
 }
 
 extension Page where T == Movie {

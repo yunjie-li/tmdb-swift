@@ -11,11 +11,11 @@ public struct MediaNetwork: Codable, Hashable, Sendable, Equatable, Identifiable
   public var logoPath: String
   public var name: String
   public var originCountry: String?
-  
+
   public static func == (lhs: MediaNetwork, rhs: MediaNetwork) -> Bool {
     return lhs.id == rhs.id
   }
-  
+
   public enum CodingKeys: String, CodingKey {
     case id
     case logoPath = "logo_path"

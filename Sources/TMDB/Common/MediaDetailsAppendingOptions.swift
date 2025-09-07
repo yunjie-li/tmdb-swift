@@ -5,7 +5,7 @@ public enum MediaDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
   case videos
   case recommendations
   case seasons
-  
+
   var movieOption: MovieDetailsAppendingOptions {
     switch self {
     case .similar: return .similar
@@ -16,7 +16,7 @@ public enum MediaDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
     case .seasons: return .seasons
     }
   }
-  
+
   var tvShowOption: TVShowDetailsAppendingOptions {
     switch self {
     case .similar: return .similar

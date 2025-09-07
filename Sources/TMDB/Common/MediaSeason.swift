@@ -15,11 +15,11 @@ public struct MediaSeason: Codable, Hashable, Sendable, Equatable, Identifiable 
   public var posterPath: String?
   public var seasonNumber: Int
   public var voteAverage: Double
-  
+
   public static func == (lhs: MediaSeason, rhs: MediaSeason) -> Bool {
     return lhs.id == rhs.id
   }
-  
+
   public enum CodingKeys: String, CodingKey {
     case airDate = "air_date"
     case episodeCount = "episode_count"
@@ -31,7 +31,6 @@ public struct MediaSeason: Codable, Hashable, Sendable, Equatable, Identifiable 
     case voteAverage = "vote_average"
   }
 }
-
 
 public struct MediaEpisode: Codable, Hashable, Sendable, Equatable, Identifiable {
   public var id: Int
@@ -46,11 +45,11 @@ public struct MediaEpisode: Codable, Hashable, Sendable, Equatable, Identifiable
   public var seasonNumber: Int
   public var showId: Int
   public var stillPath: String?
-  
+
   public static func == (lhs: MediaEpisode, rhs: MediaEpisode) -> Bool {
     return lhs.id == rhs.id
   }
-  
+
   public enum CodingKeys: String, CodingKey {
     case id
     case name
@@ -66,4 +65,3 @@ public struct MediaEpisode: Codable, Hashable, Sendable, Equatable, Identifiable
     case stillPath = "still_path"
   }
 }
-
