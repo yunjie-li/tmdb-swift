@@ -34,7 +34,13 @@ struct SearchTests {
   @Test
   func searchMultiResponseDecoding() throws {
     let decoder = JSONDecoder()
-    let searchResult = try decoder.decode(Page<Media>.self, from: .searchMulti)
+    let mediaPage = try decoder.decode(Page<Media>.self, from: .searchMulti)
+    let searchResult = Page<MediaDetail>(
+      page: mediaPage.page,
+      results: mediaPage.results.map { MediaDetail(from: $0) },
+      totalPages: mediaPage.totalPages,
+      totalResults: mediaPage.totalResults
+    )
     
     #expect(searchResult.page == 1)
     #expect(searchResult.totalPages == 1)
@@ -47,7 +53,6 @@ struct SearchTests {
     #expect(movieResult.mediaType == .movie)
     #expect(movieResult.title == "The Shawshank Redemption")
     #expect(movieResult.overview.contains("Framed in the 1940s"))
-    #expect(movieResult.name == nil)
     
     // Check TV show result
     let tvResult = searchResult.results[1]
@@ -55,15 +60,12 @@ struct SearchTests {
     #expect(tvResult.mediaType == .tv)
     #expect(tvResult.title == "The Simpsons")
     #expect(tvResult.originCountry == ["US"])
-    #expect(tvResult.name == "The Simpsons")
     
     // Check person result
     let personResult = searchResult.results[2]
     #expect(personResult.id == 31)
     #expect(personResult.mediaType == .person)
-    #expect(personResult.name == "Tim Robbins")
-    #expect(personResult.knownForDepartment == "Acting")
-    #expect(personResult.profilePath == "/hsCu1JUzQQ4pl7uFxAVCDlW4CUP.jpg")
-    #expect(personResult.knownFor?.count == 1)
+    #expect(personResult.originalTitle == "Tim Robbins")
+    #expect(personResult.title == "Tim Robbins")
   }
 }

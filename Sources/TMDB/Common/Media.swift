@@ -456,6 +456,65 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     )
   }
 
+  public init(from media: Media) {
+    let displayTitle: String
+    let originalTitle: String
+    
+    // Handle different media types appropriately
+    switch media.mediaType {
+    case .person:
+      displayTitle = media.name ?? ""
+      originalTitle = media.name ?? ""
+    case .movie, .tv:
+      displayTitle = media.title
+      originalTitle = media.originalTitle
+    }
+    
+    self.init(
+      id: media.id,
+      mediaType: media.mediaType,
+      adult: media.adult,
+      backdropPath: media.backdropPath,
+      genreIds: media.genreIds,
+      genres: nil,
+      originalLanguage: media.originalLanguage,
+      originalTitle: originalTitle,
+      title: displayTitle,
+      overview: media.overview,
+      popularity: media.popularity ?? 0.0,
+      posterPath: media.posterPath,
+      releaseDate: media.releaseDate,
+      voteAverage: media.voteAverage ?? 0.0,
+      voteCount: media.voteCount ?? 0,
+      video: media.video,
+      originCountry: media.originCountry,
+      belongsToCollection: nil,
+      budget: nil,
+      homepage: nil,
+      imdbID: nil,
+      productionCompanies: nil,
+      productionCountries: nil,
+      revenue: nil,
+      runtime: nil,
+      spokenLanguages: nil,
+      status: nil,
+      tagline: nil,
+      inProduction: nil,
+      languages: nil,
+      lastAirDate: nil,
+      numberOfEpisodes: nil,
+      numberOfSeasons: nil,
+      type: nil,
+      seasons: nil,
+      images: nil,
+      credits: nil,
+      videos: nil,
+      similar: nil,
+      recommendations: nil,
+      rating: nil
+    )
+  }
+
   private enum CodingKeys: String, CodingKey {
     case id
     case mediaType = "media_type"
