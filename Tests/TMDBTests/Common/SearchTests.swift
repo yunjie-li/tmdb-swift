@@ -32,40 +32,64 @@ struct SearchTests {
   }
 
   @Test
-  func searchMultiResponseDecoding() throws {
+  func searchMovieResponseDecoding() throws {
     let decoder = JSONDecoder()
-    let mediaPage = try decoder.decode(Page<Media>.self, from: .searchMulti)
+    let moviePage = try decoder.decode(Page<Movie>.self, from: .searchMovie)
     let searchResult = Page<MediaDetail>(
-      page: mediaPage.page,
-      results: mediaPage.results.map { MediaDetail(from: $0) },
-      totalPages: mediaPage.totalPages,
-      totalResults: mediaPage.totalResults
+      page: moviePage.page,
+      results: moviePage.results.map { MediaDetail(from: $0) },
+      totalPages: moviePage.totalPages,
+      totalResults: moviePage.totalResults
     )
     
     #expect(searchResult.page == 1)
     #expect(searchResult.totalPages == 1)
-    #expect(searchResult.totalResults == 3)
-    #expect(searchResult.results.count == 3)
+    #expect(searchResult.totalResults == 2)
+    #expect(searchResult.results.count == 2)
     
-    // Check movie result
-    let movieResult = searchResult.results[0]
-    #expect(movieResult.id == 278)
-    #expect(movieResult.mediaType == .movie)
-    #expect(movieResult.title == "The Shawshank Redemption")
-    #expect(movieResult.overview.contains("Framed in the 1940s"))
+    // Check first movie result
+    let firstMovie = searchResult.results[0]
+    #expect(firstMovie.id == 278)
+    #expect(firstMovie.mediaType == .movie)
+    #expect(firstMovie.title == "The Shawshank Redemption")
+    #expect(firstMovie.overview.contains("Framed in the 1940s"))
     
-    // Check TV show result
-    let tvResult = searchResult.results[1]
-    #expect(tvResult.id == 456)
-    #expect(tvResult.mediaType == .tv)
-    #expect(tvResult.title == "The Simpsons")
-    #expect(tvResult.originCountry == ["US"])
+    // Check second movie result
+    let secondMovie = searchResult.results[1]
+    #expect(secondMovie.id == 238)
+    #expect(secondMovie.mediaType == .movie)
+    #expect(secondMovie.title == "The Godfather")
+    #expect(secondMovie.overview.contains("Spanning the years"))
+  }
+
+  @Test
+  func searchTVShowResponseDecoding() throws {
+    let decoder = JSONDecoder()
+    let tvPage = try decoder.decode(Page<TVShow>.self, from: .searchTVShow)
+    let searchResult = Page<MediaDetail>(
+      page: tvPage.page,
+      results: tvPage.results.map { MediaDetail(from: $0) },
+      totalPages: tvPage.totalPages,
+      totalResults: tvPage.totalResults
+    )
     
-    // Check person result
-    let personResult = searchResult.results[2]
-    #expect(personResult.id == 31)
-    #expect(personResult.mediaType == .person)
-    #expect(personResult.originalTitle == "Tim Robbins")
-    #expect(personResult.title == "Tim Robbins")
+    #expect(searchResult.page == 1)
+    #expect(searchResult.totalPages == 1)
+    #expect(searchResult.totalResults == 2)
+    #expect(searchResult.results.count == 2)
+    
+    // Check first TV show result
+    let firstShow = searchResult.results[0]
+    #expect(firstShow.id == 456)
+    #expect(firstShow.mediaType == .tv)
+    #expect(firstShow.title == "The Simpsons")
+    #expect(firstShow.originCountry == ["US"])
+    
+    // Check second TV show result
+    let secondShow = searchResult.results[1]
+    #expect(secondShow.id == 1396)
+    #expect(secondShow.mediaType == .tv)
+    #expect(secondShow.title == "Breaking Bad")
+    #expect(secondShow.overview.contains("When Walter White"))
   }
 }
