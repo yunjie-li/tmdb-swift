@@ -32,6 +32,8 @@ extension TMDBClient {
         includeVideoLanguage: includeVideoLanguage,
         appending: tvShowAppending
       )
+    case .person:
+      throw TMDBClientError.unsupportedMediaType(mediaType)
     }
   }
 
@@ -106,6 +108,8 @@ extension TMDBClient {
           totalPages: tvShowPage.totalPages,
           totalResults: tvShowPage.totalResults
         )
+      case .person:
+        throw TMDBClientError.unsupportedMediaType(list.mediaType)
       }
     } else {
       throw try decoder.decode(TMDBError.self, from: response.data)

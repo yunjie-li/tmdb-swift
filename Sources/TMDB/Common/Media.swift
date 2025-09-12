@@ -16,6 +16,11 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
   public var voteCount: Int?
   public var video: Bool?
   public var originCountry: [String]?
+  
+  public var name: String?
+  public var profilePath: String?
+  public var knownForDepartment: String?
+  public var knownFor: [Media]?
 
   public init(
     id: Int,
@@ -33,7 +38,11 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     voteAverage: Double?,
     voteCount: Int?,
     video: Bool?,
-    originCountry: [String]?
+    originCountry: [String]?,
+    name: String? = nil,
+    profilePath: String? = nil,
+    knownForDepartment: String? = nil,
+    knownFor: [Media]? = nil
   ) {
     self.id = id
     self.mediaType = mediaType
@@ -51,6 +60,10 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     self.voteCount = voteCount
     self.video = video
     self.originCountry = originCountry
+    self.name = name
+    self.profilePath = profilePath
+    self.knownForDepartment = knownForDepartment
+    self.knownFor = knownFor
   }
 
   public init(from movie: Movie) {
@@ -102,7 +115,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     case backdropPath = "backdrop_path"
     case genreIds = "genre_ids"
     case originalLanguage = "original_language"
-    case originalTitle = "original_itle"
+    case originalTitle = "original_title"
     case title
     case overview
     case popularity
@@ -112,6 +125,10 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
     case voteCount = "vote_count"
     case video
     case originCountry = "origin_country"
+    case name
+    case profilePath = "profile_path"
+    case knownForDepartment = "known_for_department"
+    case knownFor = "known_for"
   }
 
 }
@@ -119,6 +136,7 @@ public struct Media: Codable, Hashable, Identifiable, Sendable {
 public enum MediaType: String, Codable, Sendable {
   case movie
   case tv
+  case person
 }
 
 public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
