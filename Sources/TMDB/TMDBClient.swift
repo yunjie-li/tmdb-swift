@@ -27,7 +27,7 @@ public final class TMDBClient: Sendable {
     relativePath: String,
     queryItems: [URLQueryItem]? = nil
   ) throws -> URLRequest {
-    let baseURLString = "https://tmdb.wwmm.date/3/"
+    let baseURLString = "https://vtmdb.wwmm.date/3/"
     var components = URLComponents(string: baseURLString)!
     components.path.append(relativePath)
     components.queryItems = queryItems
