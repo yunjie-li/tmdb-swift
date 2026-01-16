@@ -12,22 +12,24 @@ private let defaultPerformRequest: TMDBClient.PerformRequest = { request in
 public final class TMDBClient: Sendable {
   public let accessToken: String
   public let performRequest: PerformRequest
+  public let baseURLString: String
 
   let decoder = JSONDecoder()
 
   public init(
     accessToken: String,
-    performRequest: PerformRequest? = nil
+    performRequest: PerformRequest? = nil,
+    baseURLString: String = "https://tmdb.wwmm.date/3/"
   ) {
     self.accessToken = accessToken
     self.performRequest = performRequest ?? defaultPerformRequest
+    self.baseURLString = baseURLString
   }
 
   func urlRequest(
     relativePath: String,
     queryItems: [URLQueryItem]? = nil
   ) throws -> URLRequest {
-    let baseURLString = "https://vtmdb.wwmm.date/3/"
     var components = URLComponents(string: baseURLString)!
     components.path.append(relativePath)
     components.queryItems = queryItems
