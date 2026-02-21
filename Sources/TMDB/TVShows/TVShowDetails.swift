@@ -2,7 +2,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var adult: Bool
   public var backdropPath: BackdropPath?
   // public var createdBy: [CreatedBy]
-  // public var episodeRunTime: [Int]
+  public var episodeRunTime: [Int]?
   public var firstAirDate: String
   public var genres: [Genre]
   public var homepage: String
@@ -41,6 +41,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public init(
     adult: Bool,
     backdropPath: BackdropPath?,
+    episodeRunTime: [Int]? = nil,
     firstAirDate: String,
     genres: [Genre],
     homepage: String,
@@ -74,6 +75,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   ) {
     self.adult = adult
     self.backdropPath = backdropPath
+    self.episodeRunTime = episodeRunTime
     self.firstAirDate = firstAirDate
     self.genres = genres
     self.homepage = homepage
@@ -109,6 +111,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   private enum CodingKeys: String, CodingKey {
     case adult
     case backdropPath = "backdrop_path"
+    case episodeRunTime = "episode_run_time"
     case firstAirDate = "first_air_date"
     case genres
     case homepage

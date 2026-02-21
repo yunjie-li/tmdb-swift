@@ -319,6 +319,9 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   }
 
   public init(from tvShowDetails: TVShowDetails) {
+    let tvRuntime = tvShowDetails.episodeRunTime?
+      .filter { $0 > 0 }
+      .max()
     self.init(
       id: tvShowDetails.id,
       mediaType: .tv,
@@ -344,7 +347,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       productionCompanies: tvShowDetails.productionCompanies,
       productionCountries: tvShowDetails.productionCountries,
       revenue: nil,
-      runtime: nil,
+      runtime: tvRuntime,
       spokenLanguages: tvShowDetails.spokenLanguages,
       status: tvShowDetails.status,
       tagline: tvShowDetails.tagline,
