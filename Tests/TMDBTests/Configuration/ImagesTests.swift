@@ -122,4 +122,24 @@ struct ImagesTests {
     // Verify
     #expect(url?.absoluteString == expectedURL)
   }
+
+  @Test
+  func mediaImageDecodingRegion() async throws {
+    let data = """
+    {
+      "aspect_ratio": 1.778,
+      "height": 2160,
+      "iso_3166_1": "TW",
+      "iso_639_1": "zh",
+      "file_path": "/ckZ0ytHQnMtH5AKuVHWMNNPh6FW.jpg",
+      "vote_average": 0,
+      "vote_count": 0,
+      "width": 3840
+    }
+    """.data(using: .utf8)!
+
+    let image = try JSONDecoder().decode(MediaImage.self, from: data)
+    #expect(image.lang == "zh")
+    #expect(image.region == "TW")
+  }
 }

@@ -10,6 +10,7 @@ public struct MediaImage: Codable, Hashable, Sendable {
   public var aspectRatio: Double
   public var height: Int
   public var lang: String?
+  public var region: String?
   public var filePath: String
   public var voteAverage: Double
   public var voteCount: Int
@@ -19,6 +20,7 @@ public struct MediaImage: Codable, Hashable, Sendable {
     case aspectRatio = "aspect_ratio"
     case height
     case lang = "iso_639_1"
+    case region = "iso_3166_1"
     case filePath = "file_path"
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
