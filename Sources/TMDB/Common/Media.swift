@@ -173,8 +173,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var inProduction: Bool?
   public var languages: [String]?
   public var lastAirDate: String?
-  public var lastEpisodeToAir: Episode?
-  public var nextEpisodeToAir: Episode?
+  public var lastEpisodeToAir: MediaEpisode?
+  public var nextEpisodeToAir: MediaEpisode?
   public var numberOfEpisodes: Int?
   public var numberOfSeasons: Int?
   public var type: String?
@@ -220,8 +220,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     inProduction: Bool?,
     languages: [String]?,
     lastAirDate: String?,
-    lastEpisodeToAir: Episode? = nil,
-    nextEpisodeToAir: Episode? = nil,
+    lastEpisodeToAir: MediaEpisode? = nil,
+    nextEpisodeToAir: MediaEpisode? = nil,
     numberOfEpisodes: Int?,
     numberOfSeasons: Int?,
     type: String?,

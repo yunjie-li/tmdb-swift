@@ -10,9 +10,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var inProduction: Bool
   public var languages: [String]
   public var lastAirDate: String?
-  public var lastEpisodeToAir: Episode?
+  public var lastEpisodeToAir: MediaEpisode?
   public var name: String
-  public var nextEpisodeToAir: Episode?
+  public var nextEpisodeToAir: MediaEpisode?
   // public var networks: [Network]
   public var numberOfEpisodes: Int?
   public var numberOfSeasons: Int
@@ -49,9 +49,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     inProduction: Bool,
     languages: [String],
     lastAirDate: String?,
-    lastEpisodeToAir: Episode?,
+    lastEpisodeToAir: MediaEpisode?,
     name: String,
-    nextEpisodeToAir: Episode?,
+    nextEpisodeToAir: MediaEpisode?,
     numberOfEpisodes: Int?,
     numberOfSeasons: Int,
     originCountry: [String],
