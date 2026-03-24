@@ -10,9 +10,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var inProduction: Bool
   public var languages: [String]
   public var lastAirDate: String?
-  // public var lastEpisodeToAir: Episode?
+  public var lastEpisodeToAir: Episode?
   public var name: String
-  // public var nextEpisodeToAir: Episode?
+  public var nextEpisodeToAir: Episode?
   // public var networks: [Network]
   public var numberOfEpisodes: Int?
   public var numberOfSeasons: Int
@@ -49,7 +49,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     inProduction: Bool,
     languages: [String],
     lastAirDate: String?,
+    lastEpisodeToAir: Episode?,
     name: String,
+    nextEpisodeToAir: Episode?,
     numberOfEpisodes: Int?,
     numberOfSeasons: Int,
     originCountry: [String],
@@ -83,7 +85,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     self.inProduction = inProduction
     self.languages = languages
     self.lastAirDate = lastAirDate
+    self.lastEpisodeToAir = lastEpisodeToAir
     self.name = name
+    self.nextEpisodeToAir = nextEpisodeToAir
     self.numberOfEpisodes = numberOfEpisodes
     self.numberOfSeasons = numberOfSeasons
     self.originCountry = originCountry
@@ -119,7 +123,9 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     case inProduction = "in_production"
     case languages
     case lastAirDate = "last_air_date"
+    case lastEpisodeToAir = "last_episode_to_air"
     case name
+    case nextEpisodeToAir = "next_episode_to_air"
     case numberOfEpisodes = "number_of_episodes"
     case numberOfSeasons = "number_of_seasons"
     case originCountry = "origin_country"

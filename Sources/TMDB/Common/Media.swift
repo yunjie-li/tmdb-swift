@@ -173,6 +173,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
   public var inProduction: Bool?
   public var languages: [String]?
   public var lastAirDate: String?
+  public var lastEpisodeToAir: Episode?
+  public var nextEpisodeToAir: Episode?
   public var numberOfEpisodes: Int?
   public var numberOfSeasons: Int?
   public var type: String?
@@ -218,6 +220,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     inProduction: Bool?,
     languages: [String]?,
     lastAirDate: String?,
+    lastEpisodeToAir: Episode? = nil,
+    nextEpisodeToAir: Episode? = nil,
     numberOfEpisodes: Int?,
     numberOfSeasons: Int?,
     type: String?,
@@ -260,6 +264,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     self.inProduction = inProduction
     self.languages = languages
     self.lastAirDate = lastAirDate
+    self.lastEpisodeToAir = lastEpisodeToAir
+    self.nextEpisodeToAir = nextEpisodeToAir
     self.numberOfEpisodes = numberOfEpisodes
     self.numberOfSeasons = numberOfSeasons
     self.type = type
@@ -305,6 +311,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       inProduction: nil,
       languages: nil,
       lastAirDate: nil,
+      lastEpisodeToAir: nil,
+      nextEpisodeToAir: nil,
       numberOfEpisodes: nil,
       numberOfSeasons: nil,
       type: nil,
@@ -354,6 +362,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       inProduction: tvShowDetails.inProduction,
       languages: tvShowDetails.languages,
       lastAirDate: tvShowDetails.lastAirDate,
+      lastEpisodeToAir: tvShowDetails.lastEpisodeToAir,
+      nextEpisodeToAir: tvShowDetails.nextEpisodeToAir,
       numberOfEpisodes: tvShowDetails.numberOfEpisodes,
       numberOfSeasons: tvShowDetails.numberOfSeasons,
       type: tvShowDetails.type,
@@ -550,6 +560,8 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
     case inProduction = "is_production"
     case languages
     case lastAirDate = "last_air_date"
+    case lastEpisodeToAir = "last_episode_to_air"
+    case nextEpisodeToAir = "next_episode_to_air"
     case numberOfEpisodes = "number_of_episodes"
     case numberOfSeasons = "number_of_seasons"
     case type
