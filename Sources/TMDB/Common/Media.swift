@@ -351,7 +351,7 @@ public struct MediaDetail: Codable, Hashable, Identifiable, Sendable {
       belongsToCollection: nil,
       budget: nil,
       homepage: tvShowDetails.homepage,
-      imdbID: nil,
+      imdbID: tvShowDetails.externalIDs?.imdbID,
       productionCompanies: tvShowDetails.productionCompanies,
       productionCountries: tvShowDetails.productionCountries,
       revenue: nil,

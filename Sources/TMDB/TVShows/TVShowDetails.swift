@@ -37,6 +37,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
   public var seasons: [MediaSeason]?
   public var similar: Page<TVShow>?
   public var recommendations: Page<TVShow>?
+  public var externalIDs: TVShowExternalIDs?
 
   public init(
     adult: Bool,
@@ -73,7 +74,8 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     videos: MediaVideos?,
     seasons: [MediaSeason]?,
     similar: Page<TVShow>?,
-    recommendations: Page<TVShow>?
+    recommendations: Page<TVShow>?,
+    externalIDs: TVShowExternalIDs? = nil
   ) {
     self.adult = adult
     self.backdropPath = backdropPath
@@ -110,6 +112,7 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     self.seasons = seasons
     self.similar = similar
     self.recommendations = recommendations
+    self.externalIDs = externalIDs
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -148,5 +151,53 @@ public struct TVShowDetails: Codable, Hashable, Identifiable, Sendable {
     case seasons
     case similar
     case recommendations
+    case externalIDs = "external_ids"
   }
 }
+
+public struct TVShowExternalIDs: Codable, Hashable, Sendable {
+  public let imdbID: String?
+  public let freebaseMID: String?
+  public let freebaseID: String?
+  public let tvdbID: Int?
+  public let tvrageID: Int?
+  public let wikidataID: String?
+  public let facebookID: String?
+  public let instagramID: String?
+  public let twitterID: String?
+
+  public init(
+    imdbID: String?,
+    freebaseMID: String?,
+    freebaseID: String?,
+    tvdbID: Int?,
+    tvrageID: Int?,
+    wikidataID: String?,
+    facebookID: String?,
+    instagramID: String?,
+    twitterID: String?
+  ) {
+    self.imdbID = imdbID
+    self.freebaseMID = freebaseMID
+    self.freebaseID = freebaseID
+    self.tvdbID = tvdbID
+    self.tvrageID = tvrageID
+    self.wikidataID = wikidataID
+    self.facebookID = facebookID
+    self.instagramID = instagramID
+    self.twitterID = twitterID
+  }
+
+  private enum CodingKeys: String, CodingKey {
+    case imdbID = "imdb_id"
+    case freebaseMID = "freebase_mid"
+    case freebaseID = "freebase_id"
+    case tvdbID = "tvdb_id"
+    case tvrageID = "tvrage_id"
+    case wikidataID = "wikidata_id"
+    case facebookID = "facebook_id"
+    case instagramID = "instagram_id"
+    case twitterID = "twitter_id"
+  }
+}
+

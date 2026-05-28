@@ -5,4 +5,5 @@ public enum TVShowDetailsAppendingOptions: String, CaseIterable, Codable, Hashab
   case videos
   case recommendations
   case seasons
+  case externalIDs = "external_ids"
 }

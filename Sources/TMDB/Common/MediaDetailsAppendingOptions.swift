@@ -5,6 +5,7 @@ public enum MediaDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
   case videos
   case recommendations
   case seasons
+  case externalIDs = "external_ids"
 
   var movieOption: MovieDetailsAppendingOptions {
     switch self {
@@ -14,6 +15,7 @@ public enum MediaDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
     case .videos: return .videos
     case .recommendations: return .recommendations
     case .seasons: return .seasons
+    case .externalIDs: return .externalIDs
     }
   }
 
@@ -25,6 +27,7 @@ public enum MediaDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
     case .videos: return .videos
     case .recommendations: return .recommendations
     case .seasons: return .seasons
+    case .externalIDs: return .externalIDs
     }
   }
 }

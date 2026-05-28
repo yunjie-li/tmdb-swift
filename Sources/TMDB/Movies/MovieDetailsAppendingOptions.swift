@@ -5,4 +5,5 @@ public enum MovieDetailsAppendingOptions: String, CaseIterable, Codable, Hashabl
   case videos
   case recommendations
   case seasons
+  case externalIDs = "external_ids"
 }
