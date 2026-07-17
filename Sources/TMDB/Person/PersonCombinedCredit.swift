@@ -42,6 +42,7 @@ public struct PersonCredit: Codable, Hashable, Identifiable, Sendable {
   public var creditId: String
   public var character: String?
   public var order: Int?
+  public var job: String?
 
   public init(
     id: Int,
@@ -66,7 +67,8 @@ public struct PersonCredit: Codable, Hashable, Identifiable, Sendable {
     episodeCount: Int?,
     creditId: String,
     character: String?,
-    order: Int?
+    order: Int?,
+    job: String? = nil
   ) {
     self.id = id
     self.mediaType = mediaType
@@ -91,6 +93,7 @@ public struct PersonCredit: Codable, Hashable, Identifiable, Sendable {
     self.creditId = creditId
     self.character = character
     self.order = order
+    self.job = job
   }
 
   private enum CodingKeys: String, CodingKey {
@@ -117,6 +120,7 @@ public struct PersonCredit: Codable, Hashable, Identifiable, Sendable {
     case creditId = "credit_id"
     case character
     case order
+    case job
   }
 }
 
