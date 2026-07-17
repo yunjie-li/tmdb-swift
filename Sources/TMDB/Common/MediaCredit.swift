@@ -11,6 +11,7 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
   public var name: String
   public var originalName: String?
   public var character: String?
+  public var job: String?
   public var profilePath: String?
   public var adult: Bool?
   public var gender: Int?
@@ -24,6 +25,7 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
     case name
     case originalName = "original_name"
     case character
+    case job
     case profilePath = "profile_path"
     case adult
     case gender
@@ -36,4 +38,5 @@ public struct MediaCredit: Codable, Hashable, Sendable, Identifiable {
 
 public struct MediaCredits: Codable, Hashable, Sendable {
   public var cast: [MediaCredit]?
+  public var crew: [MediaCredit]?
 }
